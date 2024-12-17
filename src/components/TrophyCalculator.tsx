@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Trophy } from 'lucide-react';
-import { getTrophyValues, GameMode } from './lib/trophyData';
+import { getTrophyValues, GameMode } from '../lib/trophyData';
 
 interface TrophyDetails {
   victory: number;
@@ -16,16 +16,18 @@ const TrophyCalculator: React.FC = () => {
 
   const calculateWinRate = (mode: GameMode, trophyCount: string): string | null => {
     const count = parseInt(trophyCount);
-    if (!count || isNaN(count)) return null;
+    if (isNaN(count) || trophyCount === '') return null;
 
     const { victory: trophyGain, defeat: trophyLoss } = getTrophyValues(mode, count);
-    const requiredWinRate = (Math.abs(trophyLoss) / (trophyGain + Math.abs(trophyLoss))) * 100;
+    // Special case for 0 trophy range where defeat is 0
+    if (trophyLoss === 0) return "0.01";
+    const requiredWinRate = (Math.abs(trophyLoss) / (trophyGain + Math.abs(trophyLoss))) * 100 + 0.01;
     return requiredWinRate.toFixed(2);
   };
 
   const getTrophyDetails = (mode: GameMode, trophyCount: string): TrophyDetails | null => {
     const count = parseInt(trophyCount);
-    if (!count || isNaN(count)) return null;
+    if (isNaN(count) || trophyCount === '') return null;
     return getTrophyValues(mode, count);
   };
 
