@@ -62,7 +62,7 @@ const TrophyCalculator: React.FC = () => {
               {winRate}%
             </p>
             <p className="text-xs text-gray-600 mt-2">
-              This is the minimum win rate needed to maintain or increase your trophy count.
+              This is the minimum win rate needed to increase your trophy count.
             </p>
           </div>
         ) : (
@@ -79,7 +79,7 @@ const TrophyCalculator: React.FC = () => {
       <CardContent className="p-6">
         <div className="flex items-center gap-2 mb-6">
           <Trophy className="w-6 h-6 text-yellow-500" />
-          <h2 className="text-2xl font-bold">Brawl Stars Trophy Calculator</h2>
+          <h2 className="text-2xl font-bold">Brawl Stars Win Rate Calculator</h2>
         </div>
 
         <div className="mb-6">
